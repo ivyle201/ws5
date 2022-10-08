@@ -1,0 +1,62 @@
+[vivian@sjsu ~]$ script ws5.txt                                                                                                                 [82/82]
+Script started, file is ws5.txt                                                                                                                        
+[vivian@sjsu ~]$                                                                                                                                       
+[vivian@sjsu ~]$ cd ws5                                                                                                                                      
+[vivian@sjsu ~]$ mkdir CUSTOMERS
+ 
+[vivian@sjsu ws5]$ cut -f 2,14 hardlinks_amazon_reviews.tsv > Amazon_col_2custID_14reviewBody.tsv                                                     
+
+[vivian@sjsu ws5]$
+[vivian@sjsu ws5]$ cut -f 1 Amazon_col_2custID_14reviewBody.tsv | sort | uniq -c | sort -nr | head -n 1000 | awk '{print $2}' > top1000_custID.tsv
+[
+[vivian@sjsu ws5]$ head top1000_custID.tsv
+
+50122160
+50732546
+52615377
+45041039
+50776149
+50913245
+20595117
+45273033
+39569598
+49693975
+
+vivian@sjsu ws5]$ 
+[vivian@sjsu ws5]$ fgrep -f top1000_custID.tsv Amazon_col_2custID_14reviewBody.tsv > top1000_custID_n_reviewBody.tsv
+
+
+[vivian@sjsu ws5]$ head -n 1 top1000_custID_n_reviewBody.tsv
+
+50732546        Though she is honored to be Chicago Woman of the Year, Victoria Colby-Camp is more euphoric over the mental improvement that her son Jim has shown recently especially since he and Tasha North fell in love.  Jim was snatched almost twenty years ago when he was seven and turned into the killing Seth whose goal was to murder Victoria for abandoning him.  However, her elation would turn to despair if she knew Seth resurfaced and started to rape a pregnant Tasha.<br /><br />Former military strategist Daniel Marks is in town complements of the Colby Agency that wants to hire him.  Also in Chicago is Emily Hastings whose father a veteran homicide detective was murdered.  She finds letters linking her dad to Victoria, the woman's long ago murdered first husband James, and her dad's first partner Marelyn Rutland that confuses her.  Soon she will meet Daniel and they will be embroiled in the COLBY CONSPIRACY that goes back almost two decades ago.<br /><br />Though the subplots can become confusing at first, once the audience comprehends how this complex superb suspense thriller starts to come together, they will want more Colby Agency tales; (see FILES FROM THE COLBY AGENCY: THE BODYGUARD'S BABY PROTECTIVE CUSTODY).  The ensemble cast is solid as fans will feel with Victoria who has overcome so much tragedy, hope Jim \\"defeats\\" Seth with Tasha at his side, and root for Daniel and Emily to make it while wondering what really happened two decades ago.  A final twist marks a strong Webb of deceit tale that showcases a fine author on her A-game.<br /><br />Harriet Klausner
+
+
+[vivian@sjsu ws5]$ for i in `cat top1000_custID.tsv` ; do grep $i top1000_custID_n_reviewBody.tsv | cut -f 2 > CUSTOMERS/$i.txt ; done                 
+                                                                                                                                   
+  
+[vivian@sjsu ws5]$ ls CUSTOMERS | wc -l 
+
+1000
+
+[vivian@sjsu ws5]$ 
+
+(-S : size, -h : human readable)
+
+[vivian@sjsu ws5]$ ls -lhS CUSTOMERS | head 
+                                                                                                         
+total 467M                                                                                                                                             
+-rw-rw-r-- 1 vivian vivian   15M Oct  8 18:11 50122160.txt                                                                                             
+-rw-rw-r-- 1 vivian vivian   15M Oct  8 18:11 50732546.txt                                                                                             
+-rw-rw-r-- 1 vivian vivian   10M Oct  8 18:11 52615377.txt                                                                                             
+-rw-rw-r-- 1 vivian vivian  6.5M Oct  8 18:10 39569598.txt                                                                                             
+-rw-rw-r-- 1 vivian vivian  6.3M Oct  8 18:10 50913245.txt                                                                                             
+-rw-rw-r-- 1 vivian vivian  4.3M Oct  8 18:10 36642996.txt                                                                                             
+-rw-rw-r-- 1 vivian vivian  3.9M Oct  8 18:11 45041039.txt                                                                                             
+-rw-rw-r-- 1 vivian vivian  3.8M Oct  8 18:10 50881246.txt                                                                                             
+-rw-rw-r-- 1 vivian vivian  3.7M Oct  8 18:10 39134375.txt                                                                                             
+[vivian@sjsu ws5]$                                                                                                                                     
+[vivian@sjsu ws5]$     
+[vivian@sjsu ws5]$ 
+[vivian@sjsu ws5]$ exit
+exit
+Script done, file is ws5.txt
